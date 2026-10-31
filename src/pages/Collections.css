@@ -1,0 +1,222 @@
+.shop__head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px;
+  align-items: end;
+  padding-top: clamp(40px, 6vw, 88px);
+}
+
+.shop__intro {
+  grid-column: 1 / span 7;
+  display: grid;
+  gap: 24px;
+  padding-bottom: 8px;
+}
+
+.shop__title {
+  font-size: var(--step-xl);
+  line-height: 0.84;
+}
+
+.shop__short {
+  max-width: 44ch;
+  font-size: var(--step-lead);
+  line-height: 1.35;
+}
+
+/* Three strips of the selected collection, sewn at unequal widths and re-cut each time it changes. */
+.shop__band {
+  grid-column: 8 / -1;
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr;
+  grid-template-rows: minmax(0, 1fr);
+  gap: var(--seam);
+  height: clamp(260px, 30vw, 440px);
+}
+
+.shop__band img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  animation: strip-recut 700ms var(--ease-in-out) both;
+}
+
+@keyframes strip-recut {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.shop__filters {
+  position: sticky;
+  top: 68px;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: clamp(48px, 6vw, 88px);
+  padding-block: 14px;
+  background: var(--bg);
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--seam);
+}
+
+.shop__filters-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 500;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    transform 140ms var(--ease-out);
+}
+
+.chip:active {
+  transform: scale(0.97);
+}
+
+.chip__count {
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+
+/* Selected is lit: etu ground, sanyan ink. */
+.chip[aria-pressed='true'] {
+  background: var(--etu);
+  color: var(--on-dark);
+}
+
+.chip[aria-pressed='true'] .chip__count {
+  color: var(--on-dark-soft);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip[aria-pressed='false']:hover {
+    background: #cfc6b4;
+  }
+}
+
+.chip--small {
+  min-height: 40px;
+  padding: 0 14px;
+  font-size: var(--step-small);
+}
+
+.sort select {
+  min-height: 40px;
+  padding: 0 40px 0 14px;
+  border: 0;
+  border-radius: 0;
+  background: var(--surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23171a2b' stroke-width='1.6'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E")
+    no-repeat right 10px center / 18px;
+  font-size: var(--step-small);
+  font-weight: 500;
+  appearance: none;
+  cursor: pointer;
+}
+
+.shop__count {
+  margin-top: 20px;
+  color: var(--muted);
+}
+
+.shop__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 56px var(--seam);
+  margin-top: 24px;
+}
+
+.shop__empty {
+  display: grid;
+  justify-items: start;
+  gap: 24px;
+  max-width: 60ch;
+  margin-top: 48px;
+  padding-block: 48px;
+}
+
+.shop__empty-title {
+  font-size: var(--step-head);
+}
+
+@media (max-width: 1100px) {
+  .shop__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .shop__head {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: end;
+  }
+
+  .shop__intro {
+    grid-column: 1;
+    gap: 14px;
+  }
+
+  .shop__title {
+    font-size: clamp(2.75rem, 14vw, 5rem);
+  }
+
+  .shop__short {
+    font-size: 1rem;
+  }
+
+  .shop__band {
+    grid-column: 1 / -1;
+    height: 52vw;
+  }
+
+  .shop__filters {
+    top: 60px;
+    flex-direction: column;
+    align-items: stretch;
+    margin-inline: 0;
+  }
+
+  .shop__filters {
+    position: static;
+  }
+
+  .chip {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .shop__filters-right {
+    justify-content: space-between;
+  }
+
+  .shop__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px var(--seam);
+  }
+}

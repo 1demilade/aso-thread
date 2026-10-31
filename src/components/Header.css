@@ -1,0 +1,200 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+  min-height: 68px;
+  padding-inline: var(--margin);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Home: the header sits on the etu hero field. */
+.site-header--dark {
+  position: absolute;
+  inset: 0 0 auto 0;
+  background: transparent;
+  color: var(--on-dark);
+}
+
+.site-header__mark {
+  justify-self: start;
+  font-family: var(--font-display);
+  font-size: var(--step-lead);
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.site-header__nav ul {
+  display: flex;
+  gap: clamp(20px, 2.6vw, 40px);
+}
+
+.site-header__link {
+  position: relative;
+  display: inline-block;
+  padding-block: 8px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* The active page carries a short seam beneath it. */
+.site-header__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 260ms var(--ease-out);
+}
+
+.site-header__link.active::after {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-header__link:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.site-header__actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-header__bag,
+.site-header__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  font-weight: 500;
+  transition: transform 160ms var(--ease-out);
+}
+
+.site-header__bag:active,
+.site-header__menu-btn:active {
+  transform: scale(0.96);
+}
+
+.site-header__count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--step-small);
+  font-weight: 600;
+}
+
+.site-header--dark .site-header__count {
+  background: rgba(230, 224, 212, 0.16);
+  color: var(--on-dark);
+}
+
+/* Colour is spent on what acts: a filled bag lights up in alaari. */
+.site-header__count[data-filled] {
+  background: var(--alaari);
+  color: #fff;
+}
+
+.site-header--dark .site-header__count[data-filled] {
+  background: var(--alaari);
+  color: #fff;
+}
+
+.site-header__menu-btn {
+  display: none;
+}
+
+.phone-menu {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .site-header {
+    grid-template-columns: 1fr auto;
+    min-height: 60px;
+  }
+
+  .site-header__nav {
+    display: none;
+  }
+
+  .site-header__bag span:not(.site-header__count) {
+    display: none;
+  }
+
+  .site-header__menu-btn {
+    display: inline-flex;
+  }
+
+  .is-menu-open {
+    color: var(--on-dark);
+    background: var(--etu);
+  }
+
+  .is-menu-open .site-header__count:not([data-filled]) {
+    background: rgba(230, 224, 212, 0.16);
+    color: var(--on-dark);
+  }
+
+  .phone-menu:not([hidden]) {
+    position: fixed;
+    inset: 60px 0 0 0;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px var(--margin) 40px;
+    background: var(--etu);
+    color: var(--on-dark);
+    animation: menu-in 360ms var(--ease-drawer) both;
+  }
+
+  .phone-menu ul {
+    display: grid;
+    gap: 6px;
+  }
+
+  .phone-menu__link {
+    display: block;
+    padding-block: 4px;
+    font-size: clamp(3.5rem, 17vw, 6rem);
+    text-decoration: none;
+  }
+
+  .phone-menu__link.active {
+    color: var(--on-dark-soft);
+  }
+
+  .phone-menu__note {
+    max-width: 30ch;
+    color: var(--on-dark-soft);
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}

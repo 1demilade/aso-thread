@@ -1,0 +1,43 @@
+.stepper {
+  display: inline-grid;
+  grid-template-columns: 48px 52px 48px;
+  align-items: center;
+  height: 52px;
+  background: var(--surface);
+}
+
+.stepper--compact {
+  grid-template-columns: 40px 36px 40px;
+  height: 40px;
+}
+
+.stepper button {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  border: 0;
+  background: none;
+  transition:
+    transform 140ms var(--ease-out),
+    background-color 160ms ease;
+}
+
+.stepper button:active:not(:disabled) {
+  transform: scale(0.9);
+}
+
+.stepper button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stepper button:hover:not(:disabled) {
+    background: #cfc6b4;
+  }
+}
+
+.stepper output {
+  text-align: center;
+  font-weight: 600;
+}

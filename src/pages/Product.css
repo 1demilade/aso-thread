@@ -1,0 +1,314 @@
+.pdp__layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px;
+  padding-top: 12px;
+}
+
+/* The photographs hang as sewn strips: the main shot, and the others stacked in a narrower strip beside it. */
+.pdp__gallery {
+  grid-column: 1 / span 8;
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+  grid-template-rows: repeat(var(--rest), minmax(0, 1fr));
+  gap: var(--seam);
+  align-self: start;
+  /* The sewn panel rides beside the order column while it scrolls. */
+  position: sticky;
+  top: 84px;
+  /* Main shot is 5/7 of the width at 4:4.6, so the whole sewn panel is 7 : 5.75. */
+  aspect-ratio: 7 / 5.75;
+}
+
+.pdp__gallery[data-count='0'] {
+  grid-template-columns: 1fr;
+  aspect-ratio: 4 / 4.6;
+}
+
+.pdp__gallery:focus-visible {
+  outline-offset: 6px;
+}
+
+.pdp__shot {
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+  background: var(--surface);
+}
+
+.pdp__shot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 25%;
+}
+
+.pdp__shot--main {
+  grid-row: 1 / -1;
+}
+
+.pdp__shot--main img {
+  animation: shot-in 600ms var(--ease-out);
+}
+
+@keyframes shot-in {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+    filter: blur(4px);
+  }
+}
+
+.pdp__info {
+  grid-column: 9 / -1;
+  align-self: start;
+  display: grid;
+  gap: 28px;
+  padding-top: 24px;
+  padding-bottom: 32px;
+}
+
+.pdp__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+
+.pdp__crumbs a {
+  text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pdp__crumbs a:hover {
+    text-decoration: underline;
+  }
+}
+
+.pdp__name {
+  margin-top: -12px;
+  font-size: var(--step-sub);
+  line-height: 0.9;
+}
+
+.pdp__price {
+  margin-top: -14px;
+  font-size: var(--step-lead);
+  font-weight: 500;
+}
+
+.pdp__summary {
+  max-width: 46ch;
+}
+
+.pdp__choices {
+  display: grid;
+  gap: 28px;
+}
+
+.pdp__hint {
+  margin-top: 10px;
+  font-size: var(--step-small);
+  color: var(--muted);
+  max-width: 44ch;
+}
+
+.pdp__error {
+  margin-top: 10px;
+  font-size: var(--step-small);
+  font-weight: 600;
+  color: var(--danger);
+}
+
+.pdp__guide {
+  margin-top: 14px;
+  font-size: var(--step-small);
+}
+
+.pdp__guide summary,
+.pdp__more summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+
+.pdp__guide summary::-webkit-details-marker,
+.pdp__more summary::-webkit-details-marker {
+  display: none;
+}
+
+.pdp__guide summary {
+  display: inline-block;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.pdp__guide table {
+  width: 100%;
+  margin: 14px 0 10px;
+  border-collapse: collapse;
+}
+
+.pdp__guide th,
+.pdp__guide td {
+  padding: 7px 8px;
+  text-align: left;
+}
+
+.pdp__guide tbody tr:nth-child(odd) {
+  background: var(--surface);
+}
+
+.pdp__guide thead th {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.pdp__guide p {
+  color: var(--muted);
+}
+
+.pdp__qty {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+.pdp__qty-label {
+  font-weight: 600;
+}
+
+.pdp__actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--seam);
+}
+
+.pdp__actions .btn {
+  width: 100%;
+  min-height: 58px;
+}
+
+.pdp__fine {
+  margin-top: -14px;
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+
+.pdp__more {
+  display: grid;
+  gap: var(--seam);
+}
+
+.pdp__more details {
+  background: var(--surface);
+}
+
+.pdp__more summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 18px;
+}
+
+.pdp__more summary::after {
+  content: '+';
+  font-size: 1.375rem;
+  font-weight: 400;
+  transition: transform 220ms var(--ease-out);
+}
+
+.pdp__more details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.pdp__more details:not([open]) > :not(summary),
+.pdp__guide:not([open]) > :not(summary) {
+  display: none;
+}
+
+.pdp__more details > :not(summary) {
+  padding: 0 18px 20px;
+}
+
+.pdp__more ul {
+  display: grid;
+  gap: 6px;
+  list-style: square;
+  padding-left: 38px;
+}
+
+.pdp__related {
+  margin-top: var(--section-gap);
+}
+
+.pdp__related-title {
+  font-size: var(--step-head);
+  margin-bottom: 48px;
+}
+
+.pdp__related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 48px var(--seam);
+}
+
+@media (max-width: 1100px) {
+  .pdp__gallery {
+    grid-column: 1 / span 6;
+  }
+  .pdp__info {
+    grid-column: 7 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .pdp__layout {
+    grid-template-columns: 1fr;
+    padding-top: 0;
+  }
+
+  .pdp__gallery,
+  .pdp__gallery[data-count] {
+    grid-column: 1;
+    display: flex;
+    gap: var(--seam);
+    margin-inline: calc(var(--margin) * -1);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    aspect-ratio: auto;
+    position: static;
+  }
+
+  .pdp__gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pdp__shot {
+    flex: 0 0 86%;
+    aspect-ratio: 4 / 5;
+    scroll-snap-align: start;
+  }
+
+  .pdp__shot:only-child {
+    flex-basis: 100%;
+  }
+
+
+  .pdp__info {
+    grid-column: 1;
+    position: static;
+    padding-top: 8px;
+  }
+
+  .pdp__related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px var(--seam);
+  }
+}

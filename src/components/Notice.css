@@ -1,0 +1,49 @@
+.notice-region {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  z-index: 55;
+  transform: translateX(-50%);
+  width: min(520px, calc(100% - 2 * var(--margin)));
+  pointer-events: none;
+}
+
+/* Floats over the page, so it may cast a shadow. */
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 18px;
+  background: var(--etu);
+  color: var(--on-dark);
+  box-shadow: 0 16px 40px rgba(23, 26, 43, 0.28); /* taste-skill-ignore: floating notice */
+  pointer-events: auto;
+  transition:
+    opacity 300ms ease,
+    transform 400ms var(--ease-out);
+  @starting-style {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.notice p {
+  flex: 1;
+  font-size: var(--step-small);
+  font-weight: 500;
+}
+
+.notice__action {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  background: var(--on-dark);
+  color: var(--etu);
+  font-weight: 600;
+  font-size: var(--step-small);
+  transition: transform 160ms var(--ease-out);
+}
+
+.notice__action:active {
+  transform: scale(0.96);
+}

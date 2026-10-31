@@ -1,0 +1,93 @@
+.picker {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.picker__legend {
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.picker__value {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.picker__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--seam);
+}
+
+.picker__option {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  min-width: 56px;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 500;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 140ms var(--ease-out);
+}
+
+.picker__option:active:not([aria-disabled]) {
+  transform: scale(0.96);
+}
+
+/* Selected is lit: etu ground, sanyan ink. */
+.picker__option[aria-checked='true'] {
+  background: var(--etu);
+  color: var(--on-dark);
+}
+
+.picker__option[aria-disabled] {
+  color: rgba(23, 26, 43, 0.4);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .picker__option[aria-checked='false']:not([aria-disabled]):hover {
+    background: #cfc6b4;
+  }
+}
+
+.picker__options[aria-invalid] .picker__option[aria-checked='false']:not([aria-disabled]) {
+  box-shadow: inset 0 0 0 2px var(--danger); /* taste-skill-ignore: form error state */
+}
+
+/* Swatches: the cloth's colour inside a square frame; the selected one is framed in etu. */
+.picker--swatch .picker__option {
+  width: 52px;
+  min-width: 0;
+  height: 52px;
+  padding: 6px;
+  background: var(--surface);
+}
+
+.picker--swatch .picker__option[aria-checked='true'] {
+  padding: 4px;
+  background: var(--alaari);
+}
+
+/* The chosen cloth is marked by alaari and by a thicker frame, not colour alone. */
+.picker--swatch .picker__option[aria-checked='true'] .picker__chip {
+  box-shadow: inset 0 0 0 3px var(--sanyan); /* taste-skill-ignore: inner frame of the selected swatch */
+}
+
+.picker__chip {
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 0 1px rgba(23, 26, 43, 0.16); /* taste-skill-ignore: keeps pale swatches visible */
+}

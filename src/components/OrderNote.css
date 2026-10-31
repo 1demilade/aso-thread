@@ -1,0 +1,59 @@
+.note {
+  display: grid;
+  gap: 10px;
+}
+
+.note__caption {
+  font-weight: 600;
+}
+
+/* The message as it will be sent: a block of etu with sanyan text, like a chat bubble cut square. */
+.note__bubble {
+  display: grid;
+  gap: 10px;
+  padding: 18px 20px 20px;
+  background: var(--etu);
+  color: var(--on-dark);
+  font-size: var(--step-small);
+  line-height: 1.5;
+}
+
+.note__item {
+  font-weight: 600;
+  font-size: var(--step-body);
+}
+
+.note__lines {
+  display: grid;
+  gap: 4px;
+}
+
+.note__lines > div {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  gap: 12px;
+}
+
+.note__lines dt {
+  color: var(--on-dark-soft);
+}
+
+/* Each value that changes settles in, so the visitor sees the message being rewritten. */
+.note__value {
+  animation: note-settle 360ms var(--ease-out);
+}
+
+@keyframes note-settle {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(2px);
+  }
+}
+
+.note__missing {
+  color: #f0a7b3;
+  font-style: normal;
+  text-decoration: underline wavy;
+  text-underline-offset: 0.25em;
+}

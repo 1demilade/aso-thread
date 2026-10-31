@@ -1,0 +1,170 @@
+.bag {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+
+.bag__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 26, 43, 0.5);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.bag[data-open] .bag__scrim {
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+/* The drawer is the one thing on the site that truly floats, so it alone casts a shadow. */
+.bag__panel {
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: min(460px, 100%);
+  background: var(--bg);
+  box-shadow: -24px 0 60px rgba(23, 26, 43, 0.22); /* taste-skill-ignore: the drawer is a real overlay */
+  transform: translateX(100%);
+  transition: transform 380ms var(--ease-drawer);
+}
+
+.bag[data-open] .bag__panel {
+  transform: none;
+  @starting-style {
+    transform: translateX(100%);
+  }
+}
+
+.bag:not([data-open]) .bag__panel {
+  transition-duration: 220ms;
+}
+
+.bag__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+}
+
+.bag__title {
+  font-size: var(--step-lead);
+}
+
+.bag__close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: var(--surface);
+  transition: transform 160ms var(--ease-out);
+}
+
+.bag__close:active {
+  transform: scale(0.94);
+}
+
+.bag__empty {
+  display: grid;
+  gap: 28px;
+  justify-items: start;
+  padding: 24px;
+}
+
+.bag__items {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8px 24px 24px;
+  display: grid;
+  gap: 28px;
+  align-content: start;
+}
+
+.bag__item {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 18px;
+}
+
+.bag__thumb img {
+  width: 96px;
+  height: 128px;
+  object-fit: cover;
+  background: var(--surface);
+}
+
+.bag__info {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.bag__name {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bag__meta {
+  color: var(--muted);
+  font-size: var(--step-small);
+}
+
+.bag__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.bag__price {
+  font-weight: 600;
+}
+
+.bag__remove,
+.bag__clear {
+  justify-self: start;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: var(--step-small);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.bag__foot {
+  display: grid;
+  gap: 14px;
+  padding: 22px 24px calc(22px + env(safe-area-inset-bottom));
+  background: var(--surface);
+}
+
+.bag__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 600;
+}
+
+.bag__total dd {
+  font-size: var(--step-lead);
+}
+
+.bag__note {
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+
+.bag__send {
+  width: 100%;
+}
+
+.bag__clear {
+  justify-self: center;
+}
